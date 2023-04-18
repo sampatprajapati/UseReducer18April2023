@@ -2,17 +2,29 @@
 import "./App.css";
 import { useReducer } from "react";
 // here we are using an object oldstate is now a object  so you have to spread the oldstate now and then you can perform your action on this.
+
 let oldstate = {
     value: 5,
 };
 
 // function defiantion area
-let reducerFunction = (oldstate, action) => {
+const reducerFunction = (oldstate, action) => {
     console.log("oldstate---->", oldstate);
     console.log("action--->", action);
     console.log("action.type--->", action.type);
+    /*switch (action.type) {
+        case 'add-entry':
+            if ( state === code.slice(0,state.length) ) {
+                return [ ...state, action.value ]
+            } else {
+                return []
+            }
+        default:
+            return state
+    }
+};*/
 
-    switch (action.type) {
+    /*switch (action.type) {
         case "ADDITION":
             return { ...oldstate, value: oldstate.value + action.payload };
             break;
@@ -26,6 +38,23 @@ let reducerFunction = (oldstate, action) => {
             break;
     }
 };
+*/
+
+    if (action.type === "ADDITION")
+        return {
+            ...oldstate,
+            value: oldstate.value + action.payload,
+        };
+    else if (action.type === "SUBTRACTION")
+        return {
+            ...oldstate,
+            value: oldstate.value - action.payload,
+        };
+    else {
+        return [oldstate];
+    }
+};
+
 function App() {
     const [newstate, dispatch] = useReducer(reducerFunction, oldstate);
     return (
