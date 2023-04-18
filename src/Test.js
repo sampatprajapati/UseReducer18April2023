@@ -1,12 +1,9 @@
 // import area
 import "./App.css";
 import { useReducer } from "react";
-// here we are using an object oldstate is now a object  so you have to spread the oldstate now and then you can perform your action on this.
-let oldstate = {
-    value: 5,
-};
 
-// function defiantion area
+let oldstate = 10;
+
 let reducerFunction = (oldstate, action) => {
     console.log("oldstate---->", oldstate);
     console.log("action--->", action);
@@ -14,11 +11,11 @@ let reducerFunction = (oldstate, action) => {
 
     switch (action.type) {
         case "ADDITION":
-            return { ...oldstate, value: oldstate.value + action.payload };
+            return oldstate + 1;
             break;
 
         case "SUBTRACTION":
-            return { ...oldstate, value: oldstate.value - action.payload };
+            return oldstate - 1;
             break;
 
         default:
@@ -30,10 +27,10 @@ function App() {
     const [newstate, dispatch] = useReducer(reducerFunction, oldstate);
     return (
         <div className="App">
-            <h1>{newstate.value}</h1>
+            <h1>{newstate}</h1>
             <button
                 onClick={() => {
-                    dispatch({ type: "ADDITION", payload: 5 });
+                    dispatch({ type: "ADDITION", payload: 1 });
                 }}
             >
                 +
@@ -48,5 +45,5 @@ function App() {
         </div>
     );
 }
-// export area
+
 export default App;
